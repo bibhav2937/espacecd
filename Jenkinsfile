@@ -14,13 +14,13 @@ podTemplate(label: 'mypod', cloud: 'kubernetes',
       container("kubectlhelm"){
 
               stage("Ensure clean K8s cluster"){                       
-                sh "helm delete ${RELEASE_NAME} -n ${NAMESPACE}"
                 sh "kubectl delete ns ${NAMESPACE}" 
                 echo "Cleanup done"
               }
               
               if( BRANCH_NAME == "espacecd") {
               stage("Deploy helm chart"){
+                  sh "kubectl create ns ${NAMESPACE}"
                   sh "helm install ${RELEASE_NAME} ${RELEASE_NAME} -n ${NAMESPACE}"
                   echo "App Deployed"
               }
