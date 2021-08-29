@@ -21,7 +21,7 @@ podTemplate(label: 'mypod', cloud: 'kubernetes',
               
               if( BRANCH_NAME == "espacecd") {
               stage("Deploy helm chart"){
-                  sh "helm install ${RELEASE_NAME} $${RELEASE_NAME} -n ${NAMESPACE}"
+                  sh "helm install ${RELEASE_NAME} ${RELEASE_NAME} -n ${NAMESPACE}"
                   echo "App Deployed"
               }
               }

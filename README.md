@@ -14,6 +14,6 @@ This is a sample repository to cover the continous-deployment of the app using h
 4. Apps are exposed using clusterIp in the cluster.
 
 # Verification
-1 Successful deployment can be verified by port-forwarding the service exposed by the deployment and sending traffic to it from the browser.
+1. Successful deployment can be verified by port-forwarding the service exposed by the deployment and sending traffic to it from the browser.
 2. Command: kubectl port-forward service/SERVICE_NAME -p LOCAL_PORT:SERVICE_PORT -n NAMESPACE
 
