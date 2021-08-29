@@ -13,16 +13,21 @@ podTemplate(label: 'mypod', cloud: 'kubernetes',
       
       container("kubectlhelm"){
 
-              stage("Ensure clean K8s cluster"){                       
-                sh "kubectl delete ns ${NAMESPACE}" 
+              stage("Ensure clean K8s cluster"){  
+                  try {
+                      sh "kubectl delete ns ${NAMESPACE}"
+                  }   
+                  catch(e){
+                      echo "NS does not exist"
+                  }                                  
                 echo "Cleanup done"
               }
               
               if( BRANCH_NAME == "espacecd") {
-              stage("Deploy helm chart"){
-                  sh "kubectl create ns ${NAMESPACE}"
-                  sh "helm install ${RELEASE_NAME} ${RELEASE_NAME} -n ${NAMESPACE}"
-                  echo "App Deployed"
+              stage("Deploy helm chart"){            
+                    sh "kubectl create ns ${NAMESPACE}"
+                    sh "helm install ${RELEASE_NAME} ${RELEASE_NAME} -n ${NAMESPACE}"
+                    echo "App Deployed"                  
               }
               }
 
